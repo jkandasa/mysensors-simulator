@@ -13,19 +13,10 @@ echo $PWD
 ls -alh
 git branch
 
-# build and push to quay.io
+# build and push to docker.io
 docker buildx build --push \
   --progress=plain \
   --build-arg=GOPROXY=${GOPROXY} \
   --platform ${PLATFORMS} \
   --file Dockerfile \
   --tag ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} .
-
-
-# build and push to docker hub
-docker buildx build --push \
-  --progress=plain \
-  --build-arg=GOPROXY=${GOPROXY} \
-  --platform ${PLATFORMS} \
-  --file Dockerfile \
-  --tag ${ALT_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} .
