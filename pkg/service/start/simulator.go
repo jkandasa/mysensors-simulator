@@ -35,6 +35,11 @@ func onMessageReceive(message *model.Message) {
 			topicSlice[3] = "0"
 			topicSlice[4] = InternalHeartbeatResponse
 			payload = "123456"
+			updatedMessage := &model.Message{Data: payload, QoS: message.QoS, Topic: strings.Join(topicSlice, "/")}
+			err := DEVICE.Write(updatedMessage)
+			if err != nil {
+				zap.L().Error("error on sending message", zap.Error(err), zap.Any("message", message))
+			}
 
 		case InternalDiscoverRequest:
 			sendAllNodes()
