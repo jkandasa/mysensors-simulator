@@ -1,0 +1,45 @@
+
+logger:
+  mode: development
+  encoding: console
+  level: debug
+
+mqtt:
+  broker: tcp://127.0.0.1:1883
+  insecure_skip_verify: false
+  username: 
+  password: 
+  subscribe: nrf24_in/#
+  publish: nrf24_out
+  qos: 0
+  transmit_pre_delay: 0s
+  reconnect_delay: 20s
+nodes:
+  - id: 0
+    name: NRF24 GW1
+    version: 1.0.alpha1
+    lib_version: 2.3.2
+    is_repeater: true
+
+  - id: 13
+    name: Power Strip
+    version: 1.1-alpha1
+    lib_version: 2.3.2
+    is_repeater: true
+    sensors:
+      - id: 1
+        name: Tube Light
+        fields:
+          - V_STATUS
+      - id: 2
+        name: Fan
+        fields:
+          - V_STATUS
+      - id: 3
+        name: Light
+        fields:
+          - V_STATUS
+      - id: 4
+        name: Plug Point
+        fields:
+          - V_STATUS
